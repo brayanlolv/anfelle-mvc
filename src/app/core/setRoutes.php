@@ -17,7 +17,11 @@ Routes::get('/montador','MontadorController' ,array(
 Routes::get('/pedidos','PedidosController' ,array(
    ''=>'index',
    'criar'=>'create',
-   'add'=>'add'
+   'add'=>'add',
+   'editar'=>'edit',
+   'update'=>'update',
+   'pesquisar-por-afl'=>'searchByAfl',
+   'pesquisar-por-nome'=>'searchByNome'
 ));
 
 Routes::get('/usuario','UserController' ,array(

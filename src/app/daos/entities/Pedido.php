@@ -21,7 +21,7 @@ class Pedido extends CoreEntity {
     $status,$montador,$data_inicio,$data_fim){
         
         //por setters and getters para fazer validacao, recusando com throw
-
+    
         // $this->id = $id ;
         $this->codigo = $afl ;
         // $this->setCpf('43423');

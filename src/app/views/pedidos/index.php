@@ -44,7 +44,7 @@
                                 <td><?php echo $row["fim"]?> </td>
 
                                 <td><?php echo $row["valor"]?> </td>
-                                <td><a href="./editar-pedido?codigo=<?php echo $row["codigo"] ?>"> editar</a></td>
+                                <td><a href="pedidos/editar/<?php echo $row["codigo"] ?>"> editar</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
