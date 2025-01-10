@@ -1,6 +1,6 @@
 <?php
 
-namespace app\daos\entities;
+namespace app\models\entities;
 
 class CoreEntity{
 
@@ -12,9 +12,44 @@ class CoreEntity{
         return $result;
     }
 
-    protected function validateCpf($cpf){//retorna true se valido, valida por digito
+    protected function isEmptyInput($str){
+      if(empty($str) || strlen(trim($str)) === 0){
+        return true;
+      }
+      return false;
+    }
 
-   
+    protected function  setGenericAtribute($value,$placeHolder){
+      if($this->isEmptyInput($value)) {
+           throw new \Exception ($placeHolder .' invalido');
+      } return $value;
+   }
+    
+   protected function validatePrice($value){
+
+    // $x = filter_var($value,FILTER_VALIDATE_FLOAT,FILTER_FLAG_ALLOW_FRACTION);
+    // echo '<br> valor'. $value;  
+    // echo '<br> x é' . var_dump($x);
+      if(filter_var($value,FILTER_VALIDATE_FLOAT,FILTER_FLAG_ALLOW_FRACTION) && $value > 0){
+        return $value;
+        // echo' if foi';
+      }else {
+        // echo 'trhow';
+        throw new \Exception ('valor total ou promob invalido');
+      }
+        
+    }  
+
+
+   protected function validateEmail($email){
+    if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+      return true;
+    }
+    return false;
+   }
+
+   protected function validateCpf($cpf){//retorna true se valido, valida por digito
+
         $cpfVector = str_split($cpf);
       
         $digitoesperado = array();

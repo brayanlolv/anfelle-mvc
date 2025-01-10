@@ -3,8 +3,6 @@ namespace app\core;
 
 use app\core\Routes;
 
-echo ' core controler ';
-
 class Controller{
 
 
@@ -49,12 +47,8 @@ class Controller{
         // include_once($classPath);
         // echo $classPath;
         $obj =  new $controller;
-        $obj->{$method}($uri[3]);
-        // $className = "HomeController";
-        // if(class_exists($className)) $controller =  new $className;else{
-        //     echo "deu ruim";
-        // }
-     
+        $obj->{$method}(isset($uri[3]) ? $uri[3]: NULL );
+
 
     }
 

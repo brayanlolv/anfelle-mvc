@@ -3,7 +3,7 @@ namespace app\controllers;
 
 
 use app\controllers\ContainerController; 
-use app\daos\MontadorDAO; 
+use app\models\MontadorDAO; 
 class MontadorController extends ContainerController{
 
     private $montadorDAO;
@@ -16,16 +16,14 @@ class MontadorController extends ContainerController{
         $this->view("\montador\consultarFormularioAFL.php",null);
     }
 
-    public function consult($afl){
-        $codigo = $afl;
-        //tratar o codigo
-        // echo " a paramentro foi, ". $codigo;
+    public function consult(){
+        $codigo = filter_var($_GET['codigo'],FILTER_UNSAFE_RAW);
         $data = $this->montadorDAO->findByAFL($codigo);
-        //tratar para nao vazer se der ruim
-
+        //tratar para nao vazer se der rui
         //b o ta no fetchall model
-        $this->view('\montador\respostaConsultarAFL.php',$data);
+        if($data) return $this->view('\montador\respostaConsultarAFL.php',$data);
 
+        $this->redirect('\montador');
     }
 
   

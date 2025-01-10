@@ -4,7 +4,7 @@ namespace app\controllers;
 
 echo 'controler puxado';
 use app\controllers\ContainerController; 
-use app\daos\UserDAO; 
+use app\models\UserDAO; 
 class UserController extends ContainerController{
 
     private $userDAO;
@@ -42,18 +42,15 @@ class UserController extends ContainerController{
         $this->redirect('');
      }
  
-    // public function SignUp(){
-
-    // }
 
     //receber forulario
     public function login(){
             
         try{
                 session_start();
-                if($_POST['formToken']  != $_SESSION['formToken']){
+                if( empty($_SESSION['formToken'])||$_POST['formToken']  != $_SESSION['formToken']){
                    echo 'estranho';
-                    throw new \Execption('deu ruim');
+                    throw new \Exception('deu ruim');
                 }
           
  
@@ -62,26 +59,18 @@ class UserController extends ContainerController{
 
                 $password = $_POST['password'];
                 $user = $this->userDAO->getUserByCpf($cpf);
-                // var_dump($user);[
-                
-                //melhorar esse isset
-                if (isset($user) && $user['senha'] == SHA1($password)){
-                    // echo 'tamo logado tamo logado';
+                if ($user && $user['senha'] == SHA1($password)){
                    
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['IP'] = $_SERVER['REMOTE_ADDR'] ;
                 //.  $_SERVER['HTTP_X_FORWARDED_FOR']
-                $_SESSION['auth'] = true;
-                
-                //por um redirect ?
+                $_SESSION['auth'] = true;               
+                $_SESSION['role'] =  $user['role'];
                 //adcionar time and last ping 
                 //estudar mais sobre a confiuracoes de sessao
-
                 $this->redirect('');
-
-                
             }
-        }catch (\Exeception $e ){
+        }catch (\Exception $e ){
                 $this->redirect('/usuario');
         }
         

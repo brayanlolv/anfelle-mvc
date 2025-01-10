@@ -1,6 +1,6 @@
 <?php
 
-namespace app\daos;
+namespace app\models;
 
 
 
@@ -14,7 +14,8 @@ class MontadorDAO{
     }
     
     public function findByAFL($afl){
-        $sql = 'SELECT codigo, nome, telefone, endereco_montagem,cep_montagem, inicio, fim  FROM pedidos WHERE codigo = :codigo AND situacao = "M"';//talvez adicionar um limitador aqui
+        $sql = 'SELECT codigo, nome, telefone, endereco_montagem,cep_montagem, inicio, fim  FROM pedidos WHERE codigo = :codigo ';//talvez adicionar um limitador aqui
+        //  AND situacao = "M"
         $stm =$this->conn ->prepare($sql);
         //tratar esse codigo aqui
         $stm->execute(['codigo'=>$afl]);

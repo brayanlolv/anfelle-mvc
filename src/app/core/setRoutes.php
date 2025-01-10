@@ -16,12 +16,14 @@ Routes::get('/montador','MontadorController' ,array(
 
 Routes::get('/pedidos','PedidosController' ,array(
    ''=>'index',
+   'lista'=>'list',
    'criar'=>'create',
    'add'=>'add',
    'editar'=>'edit',
    'update'=>'update',
-   'pesquisar-por-afl'=>'searchByAfl',
-   'pesquisar-por-nome'=>'searchByNome'
+   'detalhes'=>'details',
+   'pesquisar'=>'search',
+   
 ));
 
 Routes::get('/usuario','UserController' ,array(

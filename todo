@@ -1,0 +1,72 @@
+tirei o situcao = mM n montador para debug
+tokens form
+
+criar uma enum para os estados do pedido
+estilizar a home
+revisar list pedids
+arrumar o editar
+
+
+passar como parametro o objeto da entity ja pronto
+instacia lo no controller
+
+
+ambientes pedidos usar so siglas
+
+funcao para obter o proximo afl
+arrumar tela loging
+
+refatorar pesado o add/update do controler dos pedidos
+refatorar pesado as daos do controler dos pedidos
+refatorar e fazer m join sql pedidos details
+
+
+revisar o list da dao, pos tirei campos na view
+ 
+por setarstatuscode 
+
+cadastro precisa ter campos ↓↓↓↓↓
+
+criar uma pagina com detalhes
+afl automatico  usar o auto incremet, mas muda isso depois
+nome                                ok
+email                               ok    
+data nascimento                     adcionar vallidacao
+endereco                             ok  
+rg                                      s/ validacao
+complemento                             postergavel
+cpf                                    ok
+endereco cliente                         ok
+endereco montagem                        ok
+cep cliente                              ceps faltam verificacao
+cep montagem                             ceps faltam verificacao
+telefone                                  por verificacao
+vendedor                                   ok
+ambientes                                  postergavek     
+descricao pedido                            ok        
+valor total                                 funcionado, procurar erros
+valor promob                                 funcionado, procurar erros
+descricao pagamento                         ok
+data  inicio                                validar
+data fim                                    validar
+
+observvacoes  ↑↑↑↑↑↑↑
+
+revisar tratamento de entrada de float
+
+
+
+
+///////////////////////
+feitos
+
+criar views para  pedidos pesquisa
+    nome cliente
+    afl
+
+
+adicionar quqal vendedor realizou a compra
+arrumar text area
+pesquisar bug da paginations
+ 
+fazer funcionar pagination

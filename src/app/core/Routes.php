@@ -1,7 +1,6 @@
 <?php
 
 namespace app\core;
-echo ' core routes';
 
 class Routes{
 
