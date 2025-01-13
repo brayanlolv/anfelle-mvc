@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\controllers\ContainerController; // controler pai que é herdado
 use app\models\PedidoDAO; //model dos pedidos
 use app\models\UserDAO; 
+use app\models\entities\Pedido; 
 class PedidosController extends ContainerController{
 
     private $pedidoDAO;
@@ -46,12 +47,12 @@ class PedidosController extends ContainerController{
         $data = NULL;
 
         if(isset($_GET['afl'])){
-            $data = $this->pedidoDAO->findAllByAFL(filter_var($_GET['afl'],FILTER_UNSAFE_RAW));
+            $data = $this->pedidoDAO-> findByAFL(filter_var($_GET['afl'],FILTER_UNSAFE_RAW));
         }else if(isset($_GET['nome'])){
             $data = $this->pedidoDAO->findAllByNome(filter_var($_GET['nome'],FILTER_UNSAFE_RAW));
         }
         $this->view('\pedidos\lista.php', array(
-            'query'=>$data,
+            'query'=>[$data],
             'pagNumber' => 1
         ));
     }
@@ -81,17 +82,14 @@ class PedidosController extends ContainerController{
     //recebe o formulario e salva no banco de dados 
     public function add(){
         if(!$this->isLogged() > 0){return $this->redirect('\\'); }
-        
-        //refatorar toda essa merda
-       try{
-        echo $_POST['data_nascimento'];
-        //ver se é necessarop trocar ponto por virgula
+        try{
+
         $valor_total = $_POST['valor_total'];
         $valor_promob = $_POST['valor_promob'];
         $vendedor = $_SESSION['user_id'];
         filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
-        
-        $this->pedidoDAO->insert( $_POST['codigo'],$_POST['nome'],
+
+        $pedido = new Pedido(  $_POST['codigo'],$_POST['nome'],
         filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),
         $_POST['cpf'],$_POST['rg'],$_POST['endereco_cliente'],$_POST['cep_cliente'],$_POST['endereco_montagem'],$_POST['cep_montagem'],$_POST['telefone'],
         $_POST['desc_pedido'],
@@ -99,6 +97,9 @@ class PedidosController extends ContainerController{
         filter_var($valor_promob,FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION),
         $vendedor,$vendedor,$_POST['data_nascimento'],
         $_POST['desc_pagamento'], 1);
+
+        
+        $this->pedidoDAO->insert($pedido);
 
         // $this->redirect('/pedidos');
        }catch(\Exception  $e){
@@ -112,21 +113,30 @@ class PedidosController extends ContainerController{
         $codigo = filter_var($afl,FILTER_UNSAFE_RAW); //tratar isso
 
        try{
-        filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW );
+        filter_input_array(INPUT_POST, FILTER_UNSAFE_RAW);
+        $register = Pedido::construcFromRow($this->pedidoDAO->findByAFL($afl));
 
-        $this->pedidoDAO->updateById( $codigo,$_POST['nome'],
-        filter_var($_POST['email'],FILTER_SANITIZE_EMAIL),
-        $_POST['cpf'],$_POST['rg'],$_POST['endereco_cliente'],$_POST['cep_cliente'],$_POST['endereco_montagem'],$_POST['cep_montagem'],$_POST['telefone'],
-        $_POST['desc_pedido'],
-        filter_var($_POST['valor_total'],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION),
-        filter_var($_POST['valor_promob'],FILTER_SANITIZE_NUMBER_FLOAT,FILTER_FLAG_ALLOW_FRACTION),
-        ' ',$_SESSION['user_id'],
-        $_POST['desc_pagamento'],$_POST['status'],$_POST['data_inicio'],$_POST['data_fim']);
+        $register->setEmail(filter_var($_POST['email'],FILTER_SANITIZE_EMAIL));
+        $register->setGenericAtribute('telefone',$_POST['telefone']);
+        $register->setGenericAtribute('descricao_pedido',$_POST['desc_pedido']);
+        $register->setGenericAtribute('valor_total',$_POST['valor_total']);
+        $register->setGenericAtribute('valor_promob',$_POST['valor_promob']);
+        $register->setGenericAtribute('descricao_pagamento',$_POST['desc_pagamento']);
+        $register->setGenericAtribute('endereco_cliente',$_POST['endereco_cliente']);
+        $register->setGenericAtribute('endereco_montagem',$_POST['endereco_montagem']);
+        $register->setGenericAtribute('cep_cliente',$_POST['cep_cliente']);
+        $register->setGenericAtribute('cep_montagem',$_POST['cep_montagem']);
+        $register->setGenericAtribute('lastModifiedBy',$_SESSION['user_id']);
+        // $register->setGenericAtribute('inicio',$_POST['data_inicio']);
+        // $register->setGenericAtribute('fim',$_POST['data_fim']);
+        $register->setGenericAtribute('situacao',$_POST['status']);
+        $register->inicio = $_POST['data_inicio'];
+        $register->fim = $_POST['data_fim'];
 
-        // $this->redirect('/pedidos');
+        $this->pedidoDAO->updateById($register);
        }catch(\Exception  $e){
-        echo  $e->getMessage().' deu ruim';
-    }
+            echo  $e->getMessage().' deu ruim';
+        }
 
     }
 

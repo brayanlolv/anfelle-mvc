@@ -4,6 +4,8 @@ namespace app\models\entities;
 
 class CoreEntity{
 
+
+
     public function toDictionary(){
         $result = [];
         foreach ($this as $key => $value) {
@@ -19,7 +21,15 @@ class CoreEntity{
       return false;
     }
 
-    protected function  setGenericAtribute($value,$placeHolder){
+    public function  setGenericAtribute($atribute,$value, $nullable = false){
+      if($this->isEmptyInput($value)) {
+           throw new \Exception ($atribute .' invalido');
+      }
+      $this->{$atribute} = $value;
+   }
+    
+
+    protected function  validateGenericAtribute($value,$placeHolder){
       if($this->isEmptyInput($value)) {
            throw new \Exception ($placeHolder .' invalido');
       } return $value;
@@ -39,6 +49,9 @@ class CoreEntity{
       }
         
     }  
+
+
+
 
 
    protected function validateEmail($email){

@@ -6,9 +6,9 @@ estilizar a home
 revisar list pedids
 arrumar o editar
 
+tetnar fazer um model (base) mais eficiente
 
-passar como parametro o objeto da entity ja pronto
-instacia lo no controller
+
 
 
 ambientes pedidos usar so siglas
@@ -16,8 +16,8 @@ ambientes pedidos usar so siglas
 funcao para obter o proximo afl
 arrumar tela loging
 
-refatorar pesado o add/update do controler dos pedidos
-refatorar pesado as daos do controler dos pedidos
+
+refatorar pesado as daos do controler dos pedidos                    70%
 refatorar e fazer m join sql pedidos details
 
 
@@ -70,3 +70,7 @@ arrumar text area
 pesquisar bug da paginations
  
 fazer funcionar pagination
+
+passar como parametro o objeto da entity ja pronto
+instacia lo no controller
+refatorar pesado o add/update do controler dos pedidos  ok 

@@ -15,7 +15,7 @@ class UserController extends ContainerController{
 
 
     public function index(){
-        if($this->isLogged){
+        if($this->isLogged() > 0){
             return $this->redirect('');
         }
        $this->loginForm();
@@ -24,10 +24,6 @@ class UserController extends ContainerController{
     //cuspir formulario
     public function loginForm(){    
         //passar o hash para o formualrio
-        if($this->isLogged()){
-            return $this->redirect('');
-        }
-
         $formToken = uniqid();
         $_SESSION['formToken'] = $formToken;
         $this->view('user\loginForm.php',$formToken);
