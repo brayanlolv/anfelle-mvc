@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-echo 'controler puxado';
 use app\controllers\ContainerController; 
 use app\models\UserDAO; 
 class UserController extends ContainerController{
@@ -45,7 +44,6 @@ class UserController extends ContainerController{
         try{
                 session_start();
                 if( empty($_SESSION['formToken'])||$_POST['formToken']  != $_SESSION['formToken']){
-                   echo 'estranho';
                     throw new \Exception('deu ruim');
                 }
           
@@ -66,6 +64,7 @@ class UserController extends ContainerController{
                 //estudar mais sobre a confiuracoes de sessao
                 $this->redirect('');
             }
+            throw new \Exception("authentication failure");
         }catch (\Exception $e ){
                 $this->redirect('/usuario');
         }

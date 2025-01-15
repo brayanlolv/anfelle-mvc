@@ -1,1 +1,0 @@
-voce nao esta logado

@@ -14,6 +14,7 @@ class Controller{
 
         $uri =  explode("/",parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
        
+        // dns / controller/ method/ argument
         
         $classPath = dirname(dirname(__FILE__)) .'\controllers\HomeController.php' ;//atribui o index, se achar muda, se nao esse pe o default
         //muito feio, talvez eu mude depois
@@ -25,13 +26,9 @@ class Controller{
         foreach ($routes as $route) {
 
             if($route['url'] == $uri[1]){
-    
-                //NAO SEI COMO, SÒ FUNCIONA ASSIM
-                //INSTANCIANDO O CONTROLLER
-                // $classPath =  dirname(dirname(__FILE__)) .'\controllers\\'.$route['controller'].'.php';
+
+             
                 $controller = 'app\controllers\\'.$route['controller'];
-                //Procurar o metodo
-                //NAO ESTA TESTADO
                 if(!empty($uri[2])){
                     if(in_array($uri[2],array_keys($route['actions']))){
                         $method = $route['actions'][$uri[2]];
@@ -40,17 +37,7 @@ class Controller{
             }
             
         }
-        //instancia do controller
-
-        //tirar esse include abaixo para usar o autoloader
-
-        // include_once($classPath);
-        // echo $classPath;
         $obj =  new $controller;
         $obj->{$method}(isset($uri[3]) ? $uri[3]: NULL );
-
-
     }
-
-
 }

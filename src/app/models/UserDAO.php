@@ -2,34 +2,24 @@
 namespace app\models;
 
 use app\config\Conn;
-class UserDAO{
+class UserDAO extends Model{
 
-    private $conn;
+    protected $conn;
     
     function __construct(){
+        $this->table = 'usuarios';
         $this->conn = Conn::getInstance();
     }
     function getNameById($id){
-        $sql = 'SELECT nome from usuarios WHERE id = :id';
-        $stm =$this->conn ->prepare($sql);
-        $stm->execute(['id'=>$id]);
-        return $stm->fetch();
+        return $this->findBy('id',$id,'nome');
     }
 
      function getUserById($id){
-        $sql = 'SELECT * from usuarios WHERE id = :id';
-        $stm =$this->conn ->prepare($sql);
-        $stm->execute(['id'=>$id]);
-        return $stm->fetch();
+        return $this->findBy('id',$id);
     }
     
     function getUserByCpf($cpf){
-        $sql = 'SELECT * from usuarios WHERE cpf = :cpf';
-        $stm =$this->conn ->prepare($sql);
-        $stm->execute(['cpf'=>$cpf]);
-        return $stm->fetch();
-        
-        
+         return $this->findBy('cpf',$cpf);   
     }
 
 }

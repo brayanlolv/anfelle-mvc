@@ -15,14 +15,12 @@ class Routes{
             'actions'=> $action,
             'method'=> 'get'
         ];
-        //var_dump($routes);
     }
 
     public static function post($url, $controller,$action){
         self::$routes[] = [
             'url'=> str_replace('/','',$url),
             'controller'=>$controller,
-            //se espera um array, onde o a chave é o metodo na url, e seu valor a acao no servidor
             'actions'=> $action,
             'method'=> 'post'
         ];
@@ -32,7 +30,4 @@ class Routes{
             //var_dump($routes);
             return self::$routes;
     }
-    
-    
-
 }

@@ -13,7 +13,6 @@ Routes::get('/montador','MontadorController' ,array(
    'consultar'=>'consult'
 ));
 
-
 Routes::get('/pedidos','PedidosController' ,array(
    ''=>'index',
    'lista'=>'list',

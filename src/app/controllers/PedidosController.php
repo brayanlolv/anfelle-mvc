@@ -35,9 +35,9 @@ class PedidosController extends ContainerController{
     {   
         if(!$this->isLogged() > 0){return $this->redirect('\\'); }
         $pageNumber = $this->validatePagination($offset);
-        $data = $this->pedidoDAO->all($pageNumber);
+        $viewData = $this->pedidoDAO->all($pageNumber);
         $this->view('\pedidos\lista.php',array(
-            'query'=>$data,
+            'query'=>$viewData,
             'pagNumber' => $pageNumber
         ));
     }
@@ -47,12 +47,12 @@ class PedidosController extends ContainerController{
         $data = NULL;
 
         if(isset($_GET['afl'])){
-            $data = $this->pedidoDAO-> findByAFL(filter_var($_GET['afl'],FILTER_UNSAFE_RAW));
+            $data = [$this->pedidoDAO-> findByAFL(filter_var($_GET['afl'],FILTER_UNSAFE_RAW))];
         }else if(isset($_GET['nome'])){
             $data = $this->pedidoDAO->findAllByNome(filter_var($_GET['nome'],FILTER_UNSAFE_RAW));
         }
         $this->view('\pedidos\lista.php', array(
-            'query'=>[$data],
+            'query'=>$data,
             'pagNumber' => 1
         ));
     }
@@ -103,7 +103,7 @@ class PedidosController extends ContainerController{
 
         $this->redirect('/pedidos');
        }catch(\Exception  $e){
-            echo  $e->getMessage().' deu ruim';
+            $this->view('\exceptions\exception.php',['error'=> $e->getMessage()]);
         }
     
     }

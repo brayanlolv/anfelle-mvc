@@ -4,7 +4,7 @@
   // var_dump($data);
 ?>
 
-<h1>editar pedido</h1>
+  <h1>editar pedido</h1>
 
   <form method="post" action="/pedidos/update/<?=$data['codigo'] ?>" >
 
@@ -33,11 +33,7 @@
       <label >email</label>
       <input class="form-control" type="email" name="email"  value=<?=$data['email'] ?>>
     </div>
-
- 
-
-    
-    
+  
     <div class="form-group">
       <label>endereço cliente</label>
       <input class="form-control" name="endereco_cliente" type="text"  value=<?=$data['endereco_cliente'] ?>>
@@ -59,9 +55,7 @@
       <input class="form-control" type="text" name="cep_montagem" value=<?=$data['cep_montagem'] ?> >
     </div>
 
-
-
-  <div class="form-group">
+    <div class="form-group">
       <label>Descriçao pedido</label>
       <textarea class="form-control" name="desc_pedido" rows="4" >
       <?= $data['descricao_pedido'] ?>
