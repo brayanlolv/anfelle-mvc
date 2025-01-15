@@ -101,7 +101,7 @@ class PedidosController extends ContainerController{
         
         $this->pedidoDAO->insert($pedido);
 
-        // $this->redirect('/pedidos');
+        $this->redirect('/pedidos');
        }catch(\Exception  $e){
             echo  $e->getMessage().' deu ruim';
         }
@@ -134,6 +134,8 @@ class PedidosController extends ContainerController{
         $register->fim = $_POST['data_fim'];
 
         $this->pedidoDAO->updateById($register);
+
+        $this->redirect("/pedidos/detalhes/$afl");
        }catch(\Exception  $e){
             echo  $e->getMessage().' deu ruim';
         }

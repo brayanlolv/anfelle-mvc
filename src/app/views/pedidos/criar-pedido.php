@@ -101,6 +101,6 @@
     </div>
 
     <div class="form-group">
-      <button  >cadastrar</button>
-    </div>
+          <button class="form-control btn btn-primary" type="submit">criar</button>
+        </div>
 </form>

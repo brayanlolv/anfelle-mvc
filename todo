@@ -1,24 +1,30 @@
 tirei o situcao = mM n montador para debug
 tokens form
 
-criar uma enum para os estados do pedido
-estilizar a home
-revisar list pedids
+criar uma enum para os estados do pedido  // nao sei se vai ser util
+
 arrumar o editar
 
 tetnar fazer um model (base) mais eficiente
 
-
-
+arrumar a folder strucutre da forma certa
+    core/
+    app/   
+        model   
+        controllers
+        views
+    public  
+        index
+        js,css imgs e bla bla bla
 
 ambientes pedidos usar so siglas
 
 funcao para obter o proximo afl
-arrumar tela loging
+
 
 
 refatorar pesado as daos do controler dos pedidos                    70%
-refatorar e fazer m join sql pedidos details
+refatorar e fazer m join sql pedidos details                        
 
 
 revisar o list da dao, pos tirei campos na view
@@ -64,7 +70,8 @@ criar views para  pedidos pesquisa
     nome cliente
     afl
 
-
+estilizar a home
+revisar list pedids
 adicionar quqal vendedor realizou a compra
 arrumar text area
 pesquisar bug da paginations
@@ -74,3 +81,4 @@ fazer funcionar pagination
 passar como parametro o objeto da entity ja pronto
 instacia lo no controller
 refatorar pesado o add/update do controler dos pedidos  ok 
+arrumar tela loging

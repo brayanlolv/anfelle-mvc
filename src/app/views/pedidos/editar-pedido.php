@@ -103,6 +103,6 @@
       <input class="form-control" name="data_fim" type="date" value=<?=$data['fim'] ?>>
     </div> 
     <div class="form-group">
-      <button>salvar</button>
-    </div>
+          <button class="form-control btn btn-primary" type="submit">salvar</button>
+        </div>
   </form>
