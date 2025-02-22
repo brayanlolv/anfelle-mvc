@@ -2,6 +2,7 @@
 namespace app\core;
 
 use app\core\Routes;
+use app\controllers;
 
 class Controller{
 
@@ -16,9 +17,8 @@ class Controller{
        
         // dns / controller/ method/ argument
         
-        $classPath = dirname(dirname(__FILE__)) .'\controllers\HomeController.php' ;//atribui o index, se achar muda, se nao esse pe o default
-        //muito feio, talvez eu mude depois
-        $controller =  'HomeController';
+        
+        $controller =  ['app\controllers\\','HomeController'];
         $method = 'index';
         $params;
 
@@ -28,7 +28,7 @@ class Controller{
             if($route['url'] == $uri[1]){
 
              
-                $controller = 'app\controllers\\'.$route['controller'];
+                $controller[1] =  $route['controller'];
                 if(!empty($uri[2])){
                     if(in_array($uri[2],array_keys($route['actions']))){
                         $method = $route['actions'][$uri[2]];
@@ -37,7 +37,9 @@ class Controller{
             }
             
         }
-        $obj =  new $controller;
+        
+        $classPath = $controller[0].$controller[1];
+        $obj =  new $classPath;
         $obj->{$method}(isset($uri[3]) ? $uri[3]: NULL );
     }
 }

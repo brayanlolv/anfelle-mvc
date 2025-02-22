@@ -25,8 +25,8 @@ class PedidosController extends ContainerController{
         if(!$this->isLogged() == 2){return $this->redirect('\\'); }
         $pedido = $this->pedidoDAO->findByAfl($afl);
         $vendedor = $userDAO->getNameById($pedido['vendedor']);
-        var_dump($pedido);
-        var_dump($vendedor);
+        // var_dump($pedido);
+        // var_dump($vendedor);
         $pedido['vendedor'] = $vendedor[0];
         $this->view('\pedidos\details.php', $pedido);
       }
